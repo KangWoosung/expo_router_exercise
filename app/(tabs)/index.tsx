@@ -22,7 +22,13 @@ export default function HomeScreen() {
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">
-          Step 1: <Text className="text-red-400">Try it</Text>
+          Step 1:{" "}
+          <Text className="text-red-400 inline-block p-4 bg-gray-300">
+            Try it!
+          </Text>
+          <Text className="text-blue-600 inline-block mx-4 p-4 bg-gray-400">
+            Tailwind works!!
+          </Text>
         </ThemedText>
         <ThemedText>
           Edit{" "}

@@ -1,6 +1,6 @@
 # This is an Expo-NativeWind Quick Start Kit Repo. 👋
 
-Just copy this Repo and start build your own App editting /app/\_layout.tsx and /app/(tabs)/index.tsx files.
+Just copy this Repo and start build your own App by editting `/app/\_layout.tsx` and `/app/(tabs)/index.tsx` files.
 
 Good luck! 🚀
 

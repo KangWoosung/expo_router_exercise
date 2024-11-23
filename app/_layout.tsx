@@ -1,44 +1,70 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
-import "react-native-reanimated";
+import { View, Text, Pressable } from "react-native";
+import React, { useCallback } from "react";
+import { Link, router, Slot, SplashScreen, Stack } from "expo-router";
 import "../global.css";
-
+import Footer from "./_component/Footer";
+import NavBar from "./_component/NavBar";
+import RootLayout from "./_component/RootLayout";
+import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { StatusBar } from "expo-status-bar";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
+const App = () => {
+  const handleTrackPlayerLoaded = useCallback(() => {
+    SplashScreen.hideAsync();
+  }, []);
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <RootNavigation />
+
+        <StatusBar style="auto" />
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
-}
+};
+
+const RootNavigation = () => {
+  // Color Theme 에 따라 상수를 변경
+  const colorScheme = useColorScheme();
+  let colorSet;
+  colorScheme === "dark" ? (colorSet = Colors.dark) : (colorSet = Colors.light);
+  const backgroundColor = colorSet.background;
+  const textColor = colorSet.text;
+
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+      <Stack.Screen
+        name="player"
+        options={{
+          presentation: "card",
+          gestureEnabled: true,
+          gestureDirection: "vertical",
+          animationDuration: 400,
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="(modals)/addToPlaylist"
+        options={{
+          presentation: "modal",
+          headerStyle: {
+            backgroundColor,
+          },
+          headerTitle: "Add to playlist",
+          headerTitleStyle: {
+            color: textColor,
+          },
+        }}
+      />
+    </Stack>
+  );
+};
+
+export default App;

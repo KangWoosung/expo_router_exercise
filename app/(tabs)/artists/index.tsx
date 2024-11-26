@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const SongsScreenLayout = () => {
+const Artists = () => {
   return (
     <View>
-      <Text>SongsScreenLayout</Text>
+      <Text>Artists</Text>
     </View>
   );
 };
 
-export default SongsScreenLayout;
+export default Artists;

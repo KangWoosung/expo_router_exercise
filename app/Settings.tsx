@@ -1,13 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const SongsMain = () => {
+const Settings = () => {
   return (
     <View>
-      <Text>SongsMain</Text>
-      <Text>SongsMain</Text>
+      <Text>Settings</Text>
     </View>
   );
 };
 
-export default SongsMain;
+export default Settings;

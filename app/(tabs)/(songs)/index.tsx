@@ -1,11 +1,16 @@
 import { View, Text } from "react-native";
 import React from "react";
+import { useColorScheme } from "nativewind";
 
 const SongsMain = () => {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+
   return (
-    <View>
-      <Text>SongsMain</Text>
-      <Text>SongsMain</Text>
+    <View className="p-4 min-h-96 bg-red-200 dark:bg-slate-800">
+      <Text className="bg-destructive text-foreground">SongsMain</Text>
+      <Text className="bg-foreground text-background dark:text-foreground">
+        {colorScheme}
+      </Text>
     </View>
   );
 };

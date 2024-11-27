@@ -1,16 +1,16 @@
 import { View, Text } from "react-native";
 import React, { Children } from "react";
+import { ThemeState, useThemeStore } from "../_contexts/themeStore";
 
 type RootLayoutProps = {
   children: React.ReactNode;
 };
 
 const RootLayout = ({ children }: RootLayoutProps) => {
-  return (
-    <View className="wrapper grid min-h-[100dvh] grid-rows-[auto-1fr-auto] bg-background">
-      {children}
-    </View>
-  );
+  //useThemeStore
+  const theme = useThemeStore((state) => state.theme);
+  const toggleTheme = useThemeStore((state) => state.toggleTheme);
+  const isDarkMode = theme === "dark";
 };
 
 export default RootLayout;
